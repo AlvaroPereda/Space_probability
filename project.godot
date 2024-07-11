@@ -14,10 +14,6 @@ config/name="Space"
 run/main_scene="res://nave/level_1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 
-[display]
-
-window/size/resizable=false
-
 [input]
 
 derecha={

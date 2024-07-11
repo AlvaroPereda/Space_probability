@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dv6s7k6nqa316" path="res://nave/ui.tscn" id="4_m5xxo"]
 [ext_resource type="Script" path="res://nave/GameController.gd" id="5_cbde7"]
 
-[node name="level_1" type="Node2D"]
+[node name="level_1" type="Node2D" groups=["level1_group"]]
 script = ExtResource("1_hj8pd")
 
 [node name="map" parent="." instance=ExtResource("1_4u30x")]
@@ -23,6 +23,7 @@ autostart = true
 position = Vector2(591, 322)
 
 [node name="GameController" type="Node2D" parent="."]
+position = Vector2(0, 1)
 script = ExtResource("5_cbde7")
 
 [connection signal="player_shoot" from="nave" to="GameController" method="_on_nave_player_shoot"]

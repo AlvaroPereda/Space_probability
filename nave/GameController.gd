@@ -5,7 +5,10 @@ var remaining_prob = 100
 signal prob
 
 func _on_player_hit():
-	print("Has perdido")
+	call_deferred("change_scene")
+
+func change_scene():
+	get_tree().change_scene_to_file("res://nave/start.tscn")
 
 func _on_player_pickup_star():
 	remaining_prob = 100

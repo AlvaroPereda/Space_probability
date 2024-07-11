@@ -8,6 +8,7 @@ var distancia_spawn:int = 20
 var game_controller: Node
 
 func _ready():
+	print(get_viewport().size) 
 	player = get_node("nave")
 	game_controller = get_node("GameController")
 	create_star()
@@ -19,8 +20,6 @@ func generate_meteor():
 	var meteor_x: float
 	var meteor_y: float
 	var side = rng.randi_range(0,3)
-	
-	meteor_instance.set_viewport(get_viewport().size)	
 	
 	match side:
 		0: #Izquierda

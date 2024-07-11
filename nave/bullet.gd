@@ -1,11 +1,8 @@
-extends Node2D
-class_name Meteor
+extends StaticBody2D
+class_name bullet
 
-var speed = 100
+var speed = 300
 var value: int
-@onready var viewport = get_viewport().size
-signal player_hit
-
 var direction_map = {
 	1: Vector2(1, 1), #Abajo derecha
 	2: Vector2(-1, -1), #Arriba izquierda
@@ -17,16 +14,16 @@ var direction_map = {
 	8: Vector2(0,-1), #Abajo
 }
 
+func _ready():
+	print("Aparecí aquí: ",$".".global_position)
+
 func _process(delta):
 	if value in direction_map:
 		var direction = direction_map[value]
 		global_position += direction * speed * delta
-	if position.y < -20 or position.y > (viewport.y + 20) or position.x < -20 or position.x > (viewport.x + 20):
-		queue_free() #Borra el meteorito 
-	
-func _on_area_2d_body_entered(body):
-	if body is Nave:
-		player_hit.emit()
 
-func set_value_meteor(aux:int):
+func _on_visible_on_screen_enabler_2d_screen_exited():
+	print("Se fue")
+
+func set_direction(aux:int):
 	value = aux
