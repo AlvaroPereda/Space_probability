@@ -26,8 +26,7 @@ func _process(delta):
 	
 func _on_area_2d_body_entered(body):
 	if body is Nave:
-		print("Se ha hecho daño desde la escena meteor")
-		#player_hit.emit()
+		player_hit.emit()
 
 func set_value_meteor(aux:int):
 	value = aux

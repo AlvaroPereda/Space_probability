@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Nave
 
 const speed = 300.0
+signal player_shoot
 var direction_to_rotation  = {
 	Vector2(1, 0): 90,     # Derecha
 	Vector2(1, 1): 135,    # Derecha abajo
@@ -16,7 +17,11 @@ var direction_to_rotation  = {
 func _physics_process(_delta):
 	var horizontal = Input.get_axis("izquierda", "derecha")
 	var vertical = Input.get_axis("arriba", "abajo")
+	var disparar = Input.is_action_just_pressed("disparar")
 	var direction  = Vector2(horizontal,vertical)
+	
+	if disparar:
+		player_shoot.emit()
 	
 	#Mover el sprite del personaje
 	if direction in direction_to_rotation:

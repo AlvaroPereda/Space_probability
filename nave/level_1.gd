@@ -9,6 +9,7 @@ var game_controller: Node
 
 func _ready():
 	player = get_node("nave")
+	game_controller = get_node("GameController")
 	create_star()
 
 func generate_meteor():
@@ -39,6 +40,7 @@ func generate_meteor():
 	meteor_instance.set_value_meteor(value)
 	add_child(meteor_instance)
 	meteor_instance.global_position = Vector2(meteor_x,meteor_y)
+	meteor_instance.connect("player_hit",Callable(game_controller,"_on_player_hit"))
 
 func calculate_value(meteor_x: float, meteor_y: float) -> int: #Calcula la dirección del meteorito
 	if (meteor_x < player.global_position.x) and (meteor_y + distancia_spawn > player.global_position.y and meteor_y - distancia_spawn < player.global_position.y): 
@@ -77,3 +79,4 @@ func create_star():
 	add_child(star_instance)
 	star_instance.global_position = Vector2(star_x,star_y)
 	star_instance.connect("star_destroyed",_on_star_star_destroyed) #Esto conecta la señal con la función, ya que al borrarlo se pierde la conexión 
+	star_instance.connect("star_destroyed",Callable(game_controller,"_on_player_pickup_star"))
