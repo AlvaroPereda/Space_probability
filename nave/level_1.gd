@@ -3,12 +3,12 @@ class_name level
 
 const meteor = preload("res://nave/meteor.tscn")
 const star = preload("res://nave/star.tscn")
+const BULLET = preload("res://nave/bullet.tscn")
 var player: Node2D
 var distancia_spawn:int = 20
 var game_controller: Node
 
 func _ready():
-	print(get_viewport().size) 
 	player = get_node("nave")
 	game_controller = get_node("GameController")
 	create_star()

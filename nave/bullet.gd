@@ -1,7 +1,7 @@
 extends StaticBody2D
-class_name bullet
+class_name Bullet
 
-var speed = 300
+var speed = 400
 var value: int
 var direction_map = {
 	1: Vector2(1, 1), #Abajo derecha
@@ -14,16 +14,17 @@ var direction_map = {
 	8: Vector2(0,-1), #Abajo
 }
 
-func _ready():
-	print("Aparecí aquí: ",$".".global_position)
-
 func _process(delta):
 	if value in direction_map:
 		var direction = direction_map[value]
 		global_position += direction * speed * delta
 
 func _on_visible_on_screen_enabler_2d_screen_exited():
-	print("Se fue")
+	queue_free()
 
 func set_direction(aux:int):
 	value = aux
+
+func _on_bullet_destroyed():
+	print("Bala destruida")
+	queue_free()

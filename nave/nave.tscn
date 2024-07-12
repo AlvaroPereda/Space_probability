@@ -15,4 +15,4 @@ texture = ExtResource("1_bx54q")
 polygon = PackedVector2Array(0, -24, -24, 24, 0, 10, 24, 24)
 
 [node name="Position" type="Node2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -36)

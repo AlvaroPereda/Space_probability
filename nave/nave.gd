@@ -36,16 +36,28 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func shoot():
-	
 	var bullet_instance = BULLET.instantiate()
-	var bullet_position = $Position.global_position + Vector2(-334, -79)  # Ajusta según la posición global del nodo actual
-	calculate_direction(bullet_position)
+	var bullet_position = $Position.global_position # Ajusta según la posición global del nodo actual
+	var direction = calculate_direction(bullet_position)
+	bullet_instance.set_direction(direction)
 	bullet_instance.global_position = bullet_position
 	get_tree().call_group("level1_group", "add_child", bullet_instance)
 	
-func calculate_direction(bullet_position:Vector2):
-	print(bullet_position.x)
-	print($".".global_position.x)
-	if(bullet_position.x > $".".position.x):
-		print("Ha entrado")
+func calculate_direction(bullet_position:Vector2) -> int:
+	if (bullet_position.x > $".".position.x and bullet_position.y == $".".position.y):
+		return 5
+	elif (bullet_position.x < $".".position.x and bullet_position.y == $".".position.y):
+		return 6
+	elif (bullet_position.x == $".".position.x and bullet_position.y < $".".position.y):
+		return 8
+	elif (bullet_position.x == $".".position.x and bullet_position.y > $".".position.y):
+		return 7
+	elif (bullet_position.x > $".".position.x and bullet_position.y > $".".position.y):
+		return 1
+	elif (bullet_position.x > $".".position.x and bullet_position.y < $".".position.y):
+		return 3
+	elif (bullet_position.x < $".".position.x and bullet_position.y > $".".position.y):
+		return 4
+	else:
+		return 2
 	
