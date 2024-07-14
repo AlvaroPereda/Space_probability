@@ -5,6 +5,7 @@ var speed = 100
 var value: int
 @onready var viewport = get_viewport().size
 signal player_hit
+signal meteor_destroy
 
 var direction_map = {
 	1: Vector2(1, 1), #Abajo derecha
@@ -21,14 +22,16 @@ func _process(delta):
 	if value in direction_map:
 		var direction = direction_map[value]
 		global_position += direction * speed * delta
-	if position.y < -20 or position.y > (viewport.y + 20) or position.x < -20 or position.x > (viewport.x + 20):
-		queue_free() 
 	
 func _on_area_2d_body_entered(body):
 	if body is Nave:
 		player_hit.emit()
 	elif body is Bullet:
+		meteor_destroy.emit()
 		queue_free()
 
 func set_value_meteor(aux:int):
 	value = aux
+
+func _on_visible_on_screen_enabler_2d_screen_exited():
+	queue_free()

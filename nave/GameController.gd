@@ -1,17 +1,23 @@
 extends Node2D
 class_name GameController
 
-var remaining_prob = 100
+var remaining_prob: int = 100
+var punctuation: int = 0
 signal prob
+signal record
 
 func _on_player_hit():
 	call_deferred("change_scene")
+
+func _on_meteor_destroyed():
+	punctuation += 1
+	record.emit(punctuation)
 
 func change_scene():
 	get_tree().change_scene_to_file("res://nave/start.tscn")
 
 func _on_player_pickup_star():
-	remaining_prob = 100
+	remaining_prob = min(remaining_prob + 5, 100)
 	prob.emit(remaining_prob)
 
 func _on_nave_player_shoot():

@@ -10,10 +10,20 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -34.5
-offset_bottom = 34.5
+offset_left = 540.0
+offset_top = 288.0
+offset_right = 670.0
+offset_bottom = 357.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 50
 text = "100%"
+
+[node name="record" type="Label" parent="."]
+offset_left = 971.0
+offset_top = 11.0
+offset_right = 1249.0
+offset_bottom = 151.0
+theme_override_font_sizes/font_size = 30
+text = "Record: 0"

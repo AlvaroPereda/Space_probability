@@ -20,7 +20,7 @@ wait_time = 1.5
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource("4_m5xxo")]
-position = Vector2(591, 322)
+position = Vector2(-14, 3)
 
 [node name="GameController" type="Node2D" parent="."]
 position = Vector2(0, 1)
@@ -29,3 +29,4 @@ script = ExtResource("5_cbde7")
 [connection signal="player_shoot" from="nave" to="GameController" method="_on_nave_player_shoot"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="prob" from="GameController" to="UI" method="_on_game_controller_prob"]
+[connection signal="record" from="GameController" to="UI" method="_on_game_controller_record"]

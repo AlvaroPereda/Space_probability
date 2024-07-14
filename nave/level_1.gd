@@ -40,6 +40,7 @@ func generate_meteor():
 	add_child(meteor_instance)
 	meteor_instance.global_position = Vector2(meteor_x,meteor_y)
 	meteor_instance.connect("player_hit",Callable(game_controller,"_on_player_hit"))
+	meteor_instance.connect("meteor_destroy",Callable(game_controller,"_on_meteor_destroyed"))
 
 func calculate_value(meteor_x: float, meteor_y: float) -> int: #Calcula la dirección del meteorito
 	if (meteor_x < player.global_position.x) and (meteor_y + distancia_spawn > player.global_position.y and meteor_y - distancia_spawn < player.global_position.y): 
