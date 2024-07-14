@@ -29,4 +29,5 @@ script = ExtResource("5_cbde7")
 [connection signal="player_shoot" from="nave" to="GameController" method="_on_nave_player_shoot"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="prob" from="GameController" to="UI" method="_on_game_controller_prob"]
+[connection signal="punctuation" from="GameController" to="UI" method="_on_game_controller_punctuation"]
 [connection signal="record" from="GameController" to="UI" method="_on_game_controller_record"]
