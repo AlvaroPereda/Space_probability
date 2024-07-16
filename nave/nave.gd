@@ -42,6 +42,7 @@ func shoot():
 	bullet_instance.set_direction(direction)
 	bullet_instance.global_position = bullet_position
 	get_tree().call_group("level1_group", "add_child", bullet_instance)
+	$laser.play()
 	
 func calculate_direction(bullet_position:Vector2) -> int:
 	if (bullet_position.x > $".".position.x and bullet_position.y == $".".position.y):

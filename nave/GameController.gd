@@ -17,6 +17,7 @@ func _on_player_hit():
 	call_deferred("change_scene")
 
 func _on_meteor_destroyed():
+	$"../meteor_explosion".play()
 	PUNCTUATION += 1
 	punctuation.emit(PUNCTUATION)
 	if PUNCTUATION > RECORD:
@@ -27,6 +28,7 @@ func change_scene():
 	get_tree().change_scene_to_file("res://nave/start.tscn")
 
 func _on_player_pickup_star():
+	$"../star_s".play()
 	remaining_prob = min(remaining_prob + 5, 100)
 	prob.emit(remaining_prob)
 
@@ -44,13 +46,20 @@ func player_loses() -> bool:
 	
 func save_game():
 	var save_file = FileAccess.open(save_path,FileAccess.WRITE)
-	save_file.store_var(punctuation)
-	save_file = null
+	save_file.store_var(PUNCTUATION)
+	save_file.close()
 	
 func load_game():
 	if FileAccess.file_exists(save_path):
-		var save_file = FileAccess.open(save_path,FileAccess.READ)
+		var save_file = FileAccess.open(save_path, FileAccess.READ)
+		
+		if save_file.get_length() == 0:
+			print("El archivo está vacío")
+			save_file.close()
+			return
+			
 		RECORD = save_file.get_var()
-		save_file = null
+		save_file.close()
 	else:
 		print("No encontrado")
+

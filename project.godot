@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Space"
-run/main_scene="res://nave/level_1.tscn"
+run/main_scene="res://nave/start.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+
+[display]
+
+window/size/resizable=false
 
 [input]
 

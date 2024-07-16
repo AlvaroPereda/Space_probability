@@ -1,10 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnjci42dvm2s7"]
+[gd_scene load_steps=6 format=3 uid="uid://dnjci42dvm2s7"]
 
 [ext_resource type="Script" path="res://nave/meteor.gd" id="1_45142"]
 [ext_resource type="Texture2D" uid="uid://bac6y1xq2l3l6" path="res://img/meteor_large.png" id="1_d16qb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i4gue"]
 radius = 14.7765
+
+[sub_resource type="Animation" id="Animation_i378v"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.5708, -3.14159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycwo1"]
+_data = {
+"spin": SubResource("Animation_i378v")
+}
 
 [node name="meteor" type="Node2D"]
 script = ExtResource("1_45142")
@@ -19,9 +40,16 @@ texture = ExtResource("1_d16qb")
 scale = Vector2(1.52, 1.68)
 shape = SubResource("CircleShape2D_i4gue")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Area2D"]
 position = Vector2(0.5, 3.57628e-06)
 scale = Vector2(2.45, 2.5)
+enable_node_path = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ycwo1")
+}
+autoplay = "spin"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="screen_exited" from="Area2D/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

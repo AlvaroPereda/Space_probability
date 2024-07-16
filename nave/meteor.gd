@@ -1,6 +1,7 @@
 extends Node2D
 class_name Meteor
 
+const EXPLOSION = preload("res://nave/explosion.tscn")
 var speed = 100
 var value: int
 @onready var viewport = get_viewport().size
@@ -27,11 +28,18 @@ func _on_area_2d_body_entered(body):
 	if body is Nave:
 		player_hit.emit()
 	elif body is Bullet:
-		meteor_destroy.emit()
-		queue_free()
+		explosion_meteor()
 
 func set_value_meteor(aux:int):
 	value = aux
 
 func _on_visible_on_screen_enabler_2d_screen_exited():
+	queue_free()
+
+func explosion_meteor():	
+	var particles = EXPLOSION.instantiate()
+	particles.position = global_position
+	particles.emitting = true
+	get_tree().current_scene.add_child(particles)
+	meteor_destroy.emit()
 	queue_free()

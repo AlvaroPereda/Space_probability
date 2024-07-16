@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dijyxbqenyrus"]
+[gd_scene load_steps=9 format=3 uid="uid://dijyxbqenyrus"]
 
 [ext_resource type="PackedScene" uid="uid://bqtcxkmc3irht" path="res://nave/map.tscn" id="1_4u30x"]
 [ext_resource type="Script" path="res://nave/level_1.gd" id="1_hj8pd"]
 [ext_resource type="PackedScene" uid="uid://c3e6r2x7u7jce" path="res://nave/nave.tscn" id="2_3ir2g"]
 [ext_resource type="PackedScene" uid="uid://dv6s7k6nqa316" path="res://nave/ui.tscn" id="4_m5xxo"]
 [ext_resource type="Script" path="res://nave/GameController.gd" id="5_cbde7"]
+[ext_resource type="AudioStream" uid="uid://bj2uojs4yn10m" path="res://sounds/explosion.wav" id="6_21q81"]
+[ext_resource type="AudioStream" uid="uid://dl6maq0ujcnry" path="res://sounds/sound_background.mp3" id="7_mthuh"]
+[ext_resource type="AudioStream" uid="uid://cl3cmmt5uws4i" path="res://sounds/star_sound.wav" id="8_wh0hs"]
 
 [node name="level_1" type="Node2D" groups=["level1_group"]]
 script = ExtResource("1_hj8pd")
@@ -25,6 +28,19 @@ position = Vector2(-14, 3)
 [node name="GameController" type="Node2D" parent="."]
 position = Vector2(0, 1)
 script = ExtResource("5_cbde7")
+
+[node name="meteor_explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_21q81")
+volume_db = -15.0
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_mthuh")
+volume_db = -45.0
+autoplay = true
+
+[node name="star_s" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_wh0hs")
+volume_db = -20.0
 
 [connection signal="player_shoot" from="nave" to="GameController" method="_on_nave_player_shoot"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
