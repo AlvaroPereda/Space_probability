@@ -44,7 +44,7 @@ jobs:
       uses: Ayowel/butler-to-itch@v1.0.0
       with:
         butler_key: ${{ secrets.ITCHIO_TOKEN }}
-        itch_user: alxprd
+        itch_user: AlvaroPereda
         itch_game: space-probability
         version: ${{ github.ref_name }}
         files: "${{ steps.export.outputs.archive_directory }}/Web.zip"
